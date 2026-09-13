@@ -1,0 +1,231 @@
+/* Admin dashboard — extends the theme defined in style.css */
+
+.admin-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.admin-title {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: var(--ink);
+}
+
+.admin-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.admin-filter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.admin-status {
+  background: var(--paper-panel);
+  border: 1px solid var(--line);
+  padding: 20px;
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.admin-table-wrap {
+  background: var(--paper-panel);
+  border: 1px solid var(--line);
+  overflow-x: auto;
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.admin-table th {
+  text-align: left;
+  font-family: var(--font-display);
+  font-weight: 600;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper);
+  white-space: nowrap;
+}
+
+.admin-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.admin-table tbody tr {
+  cursor: pointer;
+}
+
+.admin-table tbody tr:hover {
+  background: var(--paper);
+}
+
+.admin-table tbody tr.is-resolved {
+  opacity: 0.6;
+}
+
+.admin-table__question {
+  max-width: 320px;
+}
+
+.admin-table__time {
+  white-space: nowrap;
+  color: var(--ink-soft);
+  font-size: 0.85rem;
+}
+
+.status-toggle {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 5px 10px;
+  border: 1px solid var(--amber-deep);
+  background: var(--paper);
+  color: var(--amber-deep);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.status-toggle:hover {
+  background: #fbeee0;
+}
+
+.status-toggle--resolved {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: #eaf2f2;
+}
+
+/* -------------------------------------------------- modal --------- */
+
+.admin-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 43, 74, 0.55);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 48px 20px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.admin-modal__box {
+  background: var(--paper-panel);
+  border: 1px solid var(--line);
+  max-width: 720px;
+  width: 100%;
+  padding: 32px;
+  position: relative;
+}
+
+.admin-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--ink-soft);
+}
+
+.admin-modal__close:hover {
+  color: var(--ink);
+}
+
+.admin-modal__meta {
+  margin: 0 0 18px;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.admin-modal__heading {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-modal__question {
+  margin: 0 0 24px;
+  white-space: pre-wrap;
+}
+
+.admin-modal__answer {
+  font-size: 0.98rem;
+}
+
+@media (max-width: 640px) {
+  .admin-table__question {
+    max-width: 160px;
+  }
+}
+
+/* -------------------------------------------------- login page ---- */
+
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.login-box {
+  background: var(--paper-panel);
+  border: 1px solid var(--line);
+  padding: 36px 32px;
+  width: 100%;
+  max-width: 360px;
+}
+
+.login-title {
+  margin: 4px 0 24px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--ink);
+  border-bottom: 3px solid var(--amber);
+  padding-bottom: 16px;
+}
+
+.login-error {
+  margin: 0 0 18px;
+  padding: 10px 12px;
+  border: 1px solid var(--error);
+  background: #fbeae7;
+  color: var(--error);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.login-submit {
+  width: 100%;
+  margin-top: 6px;
+}

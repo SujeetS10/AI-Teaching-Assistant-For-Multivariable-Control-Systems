@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI Teaching Assistant — {{ subject }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css" />
+
+<!-- Answer rendering: Markdown + LaTeX math, sanitized before insertion -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12/lib/marked.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- Identity panel: fixed subject, block-diagram motif -->
+  <aside class="identity">
+    <div class="identity__inner">
+      <p class="identity__kicker">AI Teaching Assistant</p>
+      <h1 class="identity__subject">{{ subject }}</h1>
+
+      <svg class="loop" viewBox="0 0 320 190" role="img" aria-label="Block diagram of a feedback control loop: reference into controller, into plant, producing output, fed back and compared to reference.">
+        <!-- signal path -->
+        <path class="loop__wire" d="M20 60 H62" />
+        <path class="loop__wire" d="M118 60 H160" />
+        <path class="loop__wire" d="M216 60 H258" />
+        <path class="loop__wire" d="M258 60 V150 H50 V96" />
+        <polygon class="loop__arrow" points="62,56 62,64 72,60" />
+        <polygon class="loop__arrow" points="160,56 160,64 170,60" />
+        <polygon class="loop__arrow" points="258,56 258,64 268,60" />
+        <polygon class="loop__arrow" points="46,100 54,100 50,90" />
+
+        <!-- sum junction -->
+        <circle class="loop__node" cx="34" cy="60" r="13" />
+        <text class="loop__label loop__label--sm" x="34" y="64" text-anchor="middle">+ −</text>
+
+        <!-- controller block -->
+        <rect class="loop__block" x="63" y="38" width="55" height="44" rx="2" />
+        <text class="loop__label" x="90" y="64" text-anchor="middle">K(s)</text>
+
+        <!-- plant block -->
+        <rect class="loop__block loop__block--accent" x="161" y="38" width="55" height="44" rx="2" />
+        <text class="loop__label loop__label--onaccent" x="188" y="64" text-anchor="middle">G(s)</text>
+
+        <text class="loop__io" x="6" y="52">r</text>
+        <text class="loop__io" x="266" y="52">y</text>
+      </svg>
+
+      <p class="identity__note">
+        Ask about state-space models, controllability &amp; observability,
+        pole placement, LQR, Kalman filtering, MIMO stability and related
+        topics.
+      </p>
+    </div>
+  </aside>
+
+  <!-- Main interaction panel -->
+  <main class="panel">
+
+    <form id="ask-form" class="form" novalidate>
+
+      <div class="field">
+        <label for="reg-no">Registration number</label>
+        <input
+          type="text"
+          id="reg-no"
+          name="reg-no"
+          placeholder="e.g. 23EE0142"
+          autocomplete="off"
+          required
+        />
+        <p class="field__error" id="reg-no-error" role="alert" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="question">Your question</label>
+        <textarea
+          id="question"
+          name="question"
+          rows="5"
+          maxlength="2000"
+          placeholder="e.g. Explain how to check controllability of a state-space system and why it matters for pole placement."
+          required
+        ></textarea>
+        <div class="field__meta">
+          <p class="field__error" id="question-error" role="alert" hidden></p>
+          <p class="field__count"><span id="char-count">0</span>/2000</p>
+        </div>
+      </div>
+
+      <div class="form__actions">
+        <button type="submit" id="ask-btn" class="btn">Ask question</button>
+        <button type="button" id="clear-btn" class="btn btn--ghost">Clear</button>
+      </div>
+
+      <p class="loading" id="loading" hidden>
+        <span class="loading__dot"></span>
+        <span class="loading__dot"></span>
+        <span class="loading__dot"></span>
+        Working through the {{ subject }} question&hellip;
+      </p>
+
+      <p class="request-error" id="request-error" role="alert" hidden></p>
+    </form>
+
+    <section class="answer" id="answer-section" aria-live="polite">
+      <h2 class="answer__title">Answer</h2>
+      <div class="answer__body" id="answer-body">
+        <p class="answer__placeholder">
+          Your answer will appear here once you ask a {{ subject }} question.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

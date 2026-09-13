@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Login — AI Teaching Assistant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css" />
+<link rel="stylesheet" href="/static/admin.css" />
+</head>
+<body>
+
+<div class="login-wrap">
+  <form class="login-box" method="post" action="/admin/login">
+    <p class="identity__kicker">Admin login</p>
+    <h1 class="login-title">{{ subject }}</h1>
+
+    {% if show_error %}
+    <p class="login-error">Incorrect username or password.</p>
+    {% endif %}
+
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" autocomplete="username" required autofocus />
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required />
+    </div>
+
+    <button type="submit" class="btn login-submit">Log in</button>
+  </form>
+</div>
+
+</body>
+</html>

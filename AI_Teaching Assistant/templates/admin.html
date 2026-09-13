@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — AI Teaching Assistant ({{ subject }})</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css" />
+<link rel="stylesheet" href="/static/admin.css" />
+</head>
+<body>
+
+<div class="admin-wrap">
+
+  <header class="admin-header">
+    <div>
+      <p class="identity__kicker">Admin dashboard</p>
+      <h1 class="admin-title">{{ subject }} — Student Questions</h1>
+    </div>
+    <div class="admin-header__actions">
+      <label class="admin-filter">
+        <input type="checkbox" id="hide-resolved" />
+        Hide resolved
+      </label>
+      <button id="refresh-btn" class="btn btn--ghost">Refresh</button>
+      <a href="/admin/logout" class="btn btn--ghost">Log out</a>
+    </div>
+  </header>
+
+  <p class="admin-status" id="admin-status">Loading interactions&hellip;</p>
+
+  <div class="admin-table-wrap">
+    <table class="admin-table" id="admin-table" hidden>
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Reg. No.</th>
+          <th>Question</th>
+          <th>Answer</th>
+          <th>Asked</th>
+        </tr>
+      </thead>
+      <tbody id="admin-table-body"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- Question/answer detail viewer -->
+<div class="admin-modal" id="admin-modal" hidden>
+  <div class="admin-modal__box">
+    <button class="admin-modal__close" id="admin-modal-close" aria-label="Close">&times;</button>
+    <p class="admin-modal__meta" id="admin-modal-meta"></p>
+    <h2 class="admin-modal__heading">Question</h2>
+    <p class="admin-modal__question" id="admin-modal-question"></p>
+    <h2 class="admin-modal__heading">Answer</h2>
+    <div class="answer__body admin-modal__answer" id="admin-modal-answer"></div>
+  </div>
+</div>
+
+<!-- Same rendering stack as the student page, for showing full answers -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12/lib/marked.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+<script src="/static/admin.js"></script>
+</body>
+</html>
